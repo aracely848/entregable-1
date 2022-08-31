@@ -1,7 +1,10 @@
+import { useState } from 'react';
+
 export default function Item({product, increasePurchasedProducts}) {
 
+  const [stock, setStock] = useState(product.stock); 
   const buy = () => {
-    product.stock = product.stock - 1;    
+    setStock(stock - 1);    
     increasePurchasedProducts();
   }
 
@@ -9,12 +12,12 @@ export default function Item({product, increasePurchasedProducts}) {
     <div className='producto'>
       <h3>{product.producto.nombre}</h3>
       <p>{product.producto.descripcion}</p>
-      <h5>En stock: {product.stock > 0 ? product.stock : <span>agotado</span>} </h5>
+      <h5>En stock: {stock > 0 ? stock : <span>agotado</span>} </h5>
       <button 
-        disabled={product.stock > 0 ? false : true} 
+        disabled={stock > 0 ? false : true} 
         onClick={buy}
       >
-        {product.stock > 0 ? 'COMPRAR' : 'SIN STOCK'}
+        {stock > 0 ? 'COMPRAR' : 'SIN STOCK'}
       </button>
     </div>
   )
